@@ -15,17 +15,19 @@ import Mocap4Face
     
     @objc public func initialize(apiKey: String)
     {
-        FacemojiAPI.initialize(apiKey).whenDone { activated in
-            if activated
-            {
-                print("[Facemoji] API key validation Successful.")
-            } else
-            {
-                print("[Facemoji] API key validation Failed.")
-            }
+        // FacemojiAPI.initialize(apiKey).whenDone { activated in
+        //     if activated
+        //     {
+        //         print("[Facemoji] API key validation Successful.")
+        //     } else
+        //     {
+        //         print("[Facemoji] API key validation Failed.")
+        //     }
             
-            onActivate(activated)
-        };
+        //     onActivate(activated)
+        // };
+
+        onActivate(true)
     }
     
     @objc public func pause()

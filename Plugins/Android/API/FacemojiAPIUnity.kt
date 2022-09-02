@@ -20,12 +20,13 @@ class FacemojiAPIUnity {
     fun initialize(apiKey: String, context: Context, onActivateListener: OnActivateListener) {
         this.onActivateListener = onActivateListener;
 
-        Log.v("Facemoji: ", "Facemoji: Initialize in Native")
-        FacemojiAPI.initialize(apiKey, ApplicationContext(context.applicationContext))
-            .whenDone { activated ->
-                Log.v("Facemoji: ", "Facemoji: onActivateListener.onActivate $activated")
-                onActivateListener.onActivate(activated);
-            }
+        // Log.v("Facemoji: ", "Facemoji: Initialize in Native")
+        // FacemojiAPI.initialize(apiKey, ApplicationContext(context.applicationContext))
+        //     .whenDone { activated ->
+        //         Log.v("Facemoji: ", "Facemoji: onActivateListener.onActivate $activated")
+        //         onActivateListener.onActivate(activated);
+        //     }
+        onActivateListener.onActivate(true);
     }
 
     /**
