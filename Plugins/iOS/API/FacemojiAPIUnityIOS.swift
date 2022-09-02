@@ -15,18 +15,7 @@ import Mocap4Face
     
     @objc public func initialize(apiKey: String)
     {
-        // FacemojiAPI.initialize(apiKey).whenDone { activated in
-        //     if activated
-        //     {
-        //         print("[Facemoji] API key validation Successful.")
-        //     } else
-        //     {
-        //         print("[Facemoji] API key validation Failed.")
-        //     }
-            
-        //     onActivate(activated)
-        // };
-
+        // API key input was formerly here
         onActivate(true)
     }
     

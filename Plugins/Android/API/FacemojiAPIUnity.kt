@@ -19,13 +19,7 @@ class FacemojiAPIUnity {
 
     fun initialize(apiKey: String, context: Context, onActivateListener: OnActivateListener) {
         this.onActivateListener = onActivateListener;
-
-        // Log.v("Facemoji: ", "Facemoji: Initialize in Native")
-        // FacemojiAPI.initialize(apiKey, ApplicationContext(context.applicationContext))
-        //     .whenDone { activated ->
-        //         Log.v("Facemoji: ", "Facemoji: onActivateListener.onActivate $activated")
-        //         onActivateListener.onActivate(activated);
-        //     }
+        // API key input was formerly here
         onActivateListener.onActivate(true);
     }
 
@@ -60,11 +54,13 @@ class FacemojiAPIUnity {
     }
 
     fun createCameraTracker(context: Context) {
-        val cameraTracker = CameraTracker(context)
+        val cameraTracker = CameraTracker(this, glContext)
         cameraTracker.trackerDelegate = this::onTracker
         cameraTracker.blendshapeNames.whenDone { names ->
-            val headPoseNames = faceRotationToSliders(Quaternion.identity).keys
-            onActivateListener?.onBlendShapeNames((names + headPoseNames));
+            runOnUiThread {
+                val headPoseNames = faceRotationToSliders(Quaternion.identity).keys
+                blendshapesView?.blendshapeNames = (names + headPoseNames).sorted()
+            }
         }
         this.cameraTracker = cameraTracker
     }

@@ -1,14 +1,14 @@
 <dependencies>
   <androidPackages>
-    <!-- <repositories>
+    <repositories>
       <repository>https://facemoji.jfrog.io/artifactory/default-maven-local/</repository>
     </repositories>
 
-    <androidPackage spec="co.facemoji:mocap4face:0.1.0">
+    <androidPackage spec="co.facemoji:mocap4face:0.4.0">
       <repositories>
         <repository>https://facemoji.jfrog.io/artifactory/default-maven-local/</repository>
       </repositories>
-    </androidPackage> -->
+    </androidPackage>
 
     <androidPackage spec= "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1"/>
     <androidPackage spec= "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.4"/>
