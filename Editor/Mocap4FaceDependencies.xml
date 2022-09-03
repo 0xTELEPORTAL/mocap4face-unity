@@ -18,8 +18,8 @@
     <androidPackage spec= "co.touchlab:stately-common:1.1.4"/>
     <androidPackage spec= "co.touchlab:stately-isolate:1.1.4-a1"/>
     <androidPackage spec= "com.squareup.okhttp3:okhttp:4.9.0"/>
-    <androidPackage spec= "org.tensorflow:tensorflow-lite:2.6.0"/>
-    <androidPackage spec= "org.tensorflow:tensorflow-lite-gpu:2.6.0"/>
+    <androidPackage spec= "org.tensorflow:tensorflow-lite:2.10.0"/>
+    <androidPackage spec= "org.tensorflow:tensorflow-lite-gpu:2.10.0"/>
   </androidPackages>
 
   <iosPods>

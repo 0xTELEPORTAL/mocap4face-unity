@@ -1,11 +1,15 @@
 package co.facemoji.mocap4face
 
+import android.app.Activity
 import android.content.Context
 import android.util.Log
+import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
 import co.facemoji.api.FacemojiAPI
 import co.facemoji.io.ApplicationContext
 import co.facemoji.math.Quaternion
+import co.facemoji.system.OpenGLContext
 import co.facemoji.tracker.FaceTrackerResult
 import co.facemoji.tracker.OpenGLTexture
 import co.facemoji.ui.CameraTextureView
@@ -14,6 +18,7 @@ import kotlin.math.min
 
 class FacemojiAPIUnity {
 
+    private var cameraView: CameraTextureView? = null
     private var cameraTracker: CameraTracker? = null
     private var onActivateListener: OnActivateListener? = null;
 
@@ -40,6 +45,8 @@ class FacemojiAPIUnity {
     }
 
     private fun onTracker(cameraImage: OpenGLTexture, trackerResult: FaceTrackerResult?) {
+        cameraView?.showTexture(cameraImage)
+
         if (trackerResult != null) {
             val blendshapes = trackerResult.blendshapes +
                     faceRotationToSliders(trackerResult.rotationQuaternion)
@@ -53,16 +60,26 @@ class FacemojiAPIUnity {
         }
     }
 
-    fun createCameraTracker(context: Context) {
-        val cameraTracker = CameraTracker(this, glContext)
-        cameraTracker.trackerDelegate = this::onTracker
-        cameraTracker.blendshapeNames.whenDone { names ->
-            runOnUiThread {
+    fun createCameraTracker(activity: Activity) {
+        cameraView = CameraTextureView(activity.applicationContext)
+        cameraView?.addGLContextCreatedListener { glContext ->
+            val cameraTracker = CameraTracker(activity, glContext)
+            cameraTracker.trackerDelegate = this::onTracker
+            cameraTracker.blendshapeNames.whenDone { names ->
                 val headPoseNames = faceRotationToSliders(Quaternion.identity).keys
-                blendshapesView?.blendshapeNames = (names + headPoseNames).sorted()
+                onActivateListener?.onBlendShapeNames((names + headPoseNames));
             }
+            this.cameraTracker = cameraTracker
         }
-        this.cameraTracker = cameraTracker
+
+        activity.runOnUiThread {
+            activity.findViewById<ViewGroup>(android.R.id.content).addView(cameraView);
+
+            // effectively hide the view
+            cameraView?.layoutParams?.width = 1;
+            cameraView?.layoutParams?.height = 1;
+            cameraView?.requestLayout()
+        }
     }
 
     fun pause() {
