@@ -45,8 +45,6 @@ class FacemojiAPIUnity {
     }
 
     private fun onTracker(cameraImage: OpenGLTexture, trackerResult: FaceTrackerResult?) {
-        cameraView?.showTexture(cameraImage)
-
         if (trackerResult != null) {
             val blendshapes = trackerResult.blendshapes +
                     faceRotationToSliders(trackerResult.rotationQuaternion)
@@ -61,6 +59,11 @@ class FacemojiAPIUnity {
     }
 
     fun createCameraTracker(activity: Activity) {
+        if (null != cameraView)
+        {
+            return;
+        }
+
         cameraView = CameraTextureView(activity.applicationContext)
         cameraView?.addGLContextCreatedListener { glContext ->
             val cameraTracker = CameraTracker(activity, glContext)
