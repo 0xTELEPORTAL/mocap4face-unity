@@ -107,7 +107,7 @@ extern "C" {
         NSString *apiKeyStr = [NSString stringWithCString: apiKey encoding: NSASCIIStringEncoding];
         
         facemoji = [[FacemojiAPIUnityIOS alloc] init];
-        // [facemoji initializeWithApiKey: apiKeyStr];
+        [facemoji initializeWithApiKey: apiKeyStr];
     }
     
     void facemoji_pause()
