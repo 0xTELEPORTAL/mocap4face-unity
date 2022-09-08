@@ -159,7 +159,7 @@ namespace Facemoji
 
         public void Destroy()
         {
-            if (Application.isEditor)
+            if (Application.isEditor || null == facemojiAPIClass)
             {
                 return;
             }
